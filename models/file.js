@@ -1,58 +1,53 @@
-const { Schema, model } = require("mongoose");
+const {Schema,model} = require('mongoose');
 
 const FileScheme = new Schema({
   createdBy: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
-  senderName: {
-    type: String,
+  archive: {
+    type: Boolean,
+    default: false,
   },
-  versions: [
-    {
-      filename: {
-        type: String,
-        minLength: 5,
-        required: true,
-      },
-      src: {
-        type: String,
-        required: true,
-      },
-      dateOfCreation: {
-        type: Date,
-        required: true,
-      },
-      description: {
-        type: String,
-      },
+  versions: [{
+    filename: {
+      type: String,
+      minLength: 5,
+      required: true,
     },
-  ],
-  allowToEdit: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      opened: {
-        type: Boolean,
-        default: false,
-      },
+    src: {
+      type: String,
+      required: true,
     },
-  ],
-  allowToRead: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-      opened: {
-        type: Boolean,
-        default: false,
-      },
+    dateOfCreation: {
+      type: Date,
+      required: true,
     },
-  ],
+    description: {
+      type: String,
+    },
+  }],
+  allowToEdit: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    opened: {
+      type: Boolean,
+      default: false,
+    }
+  }],
+  allowToRead: [{
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    opened: {
+      type: Boolean,
+      default: false,
+    }
+  }],
 });
 
-module.exports = model("file", FileScheme);
+module.exports = model('file',FileScheme);
